@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import RegistroFormulario from './Formulario'
+import ContenedorJuego from './ContenedorJuego'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const [player, setPlayer] = useState({
+        player1: '',
+        player2: '',
+        jugar: false,
+        firstPlayer: '',
+    })
 
-export default App;
+    const accionDelClick = (player1, player2, firstPlayer) => {
+        if (player1.trim() !== "" && !player2.trim() !== "") {
+            setPlayer({
+                player1: player1,
+                player2: player2,
+                jugar: true,
+                firstPlayer: firstPlayer,
+            })
+        }
+
+    }
+        return (
+            <div className=" contenedor">
+                <h1>Tic Tac Toe en React.js</h1>
+                {
+                    player.jugar
+                    ?<ContenedorJuego player ={player}/>
+                    :<RegistroFormulario accionDelClick={accionDelClick} />
+                }
+
+
+            </div>
+        )
+}
+    export default App
